@@ -1,19 +1,30 @@
-import { KrElements } from './KrElements/KrElements.js'
-
-import { getSampleRecord } from './KrElements/sample_record.js'
-import { getSampleRecords } from './KrElements/sample_record.js'
-
-import { getAction } from './KrElements/sample_record.js'
-import { getActions } from './KrElements/sample_record.js'
-
-import { thingsDiv } from './KrElements/html_template.js'
-
-import { itemDiv } from './KrElements/html_template.js'
-import { cardDiv } from './KrElements/html_template.js'
-import { KrThing, KrThings } from 'https://tactik8.github.io/kraken_thing_js/kraken_thing/kraken_thing.js';
-import { KrThingsElement } from './KrElements/baseElements/KrThingsElement/KrThingsElement.js'
+import { KrElements } from './src/index.js'
 
 
+
+
+import { getSampleRecord } from './src/sample_record.js'
+import { getSampleRecords } from './src/sample_record.js'
+
+import { getAction } from './src/sample_record.js'
+import { getActions } from './src/sample_record.js'
+
+import { thingsDiv } from './src/html_template.js'
+
+import { itemDiv } from './src/html_template.js'
+import { cardDiv } from './src/html_template.js'
+import { KrThing, KrThings } from 'krakenthing'
+import { KrThingsElement } from './src/baseElements/KrThingsElement/KrThingsElement.js'
+
+
+import { tests } from './src/baseElements/KrThingElement/tests/KrThingElement.test.js'
+
+function runTests(){
+
+    tests()
+    
+}
+runTests()
 
 
 function test1() {
@@ -437,19 +448,41 @@ function test14() {
 
 function test15() {
 
-    let record = {
-        "@type": "action",
-        "@id": "action",
-        "name": "ItemList1",
-        "actionStatus": ""
+    let things = new KrThings("ItemList", "ItemList12_3")
+
+
+    let pa1 = {
+        "@type": "addAction",
+        "@id": "add",
+        "name": "addAction",
+        "targetCollection": {
+            "@type": things.record_type,
+            "@id": things.record_id
+        },
+        "object": {
+            "@type": "digitalDocument",
+            "name": "test_add"
+        },
+        "image": {
+            "@type": "imageObject",
+            "@id": "plus",
+            "contentUrl": "./icons/plus.svg"
+        }
     }
-
-    let a = document.createElement('kr-value-ref')
-    a.record = record
+    things.addProperty('potentialAction', pa1 )
 
 
+    
+    let thingsElement = document.createElement('kr-things')
+    thingsElement.listItemTemplate = 'kr-list-item'
+    thingsElement.listItem_itemTemplate = 'kr-thing'
+    thingsElement.listItemRecordTemplate = getSampleRecord()
+    thingsElement.thing = things
+    thingsElement.initObject()
+    
+    
     let d = document.getElementById('test15')
-    d.appendChild(a)
+    d.appendChild(thingsElement)
 
 
 }
@@ -472,7 +505,7 @@ function test15() {
 //test12()
 //test13()
 //test14()
-//test15()
+test15()
 
 
 
