@@ -7,14 +7,10 @@ import { getSampleRecord } from './src/sample_record.js'
 import { getSampleRecords } from './src/sample_record.js'
 
 import { getAction } from './src/sample_record.js'
-import { getActions } from './src/sample_record.js'
 
-import { thingsDiv } from './src/html_template.js'
 
-import { itemDiv } from './src/html_template.js'
-import { cardDiv } from './src/html_template.js'
 import { KrThing, KrThings } from 'krakenthing'
-import { KrThingsElement } from './src/baseElements/KrThingsElement/KrThingsElement.js'
+
 
 
 import { tests } from './src/baseElements/KrThingElement/tests/KrThingElement.test.js'
