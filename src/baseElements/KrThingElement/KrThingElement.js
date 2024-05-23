@@ -115,8 +115,6 @@ export class KrThingElement extends HTMLElement {
     
     async renderHTML(){
 
-
-        console.log(this.record_type, this.elementRecord)
         
         let tpl = await engine.parse(this.htmlTemplate)
         this.htmlContent = await engine.render(tpl,  {item: this.elementRecord, config: this.config})
@@ -196,7 +194,6 @@ export class KrThingElement extends HTMLElement {
     }
 
     get thing(){
-        console.log('get thing', this.record_type)
         if(!this.record_type || this.record_type == null) { return null }
         if(!this.record_id || this.record_id == null) { return null }
 
@@ -359,6 +356,7 @@ export class KrThingElement extends HTMLElement {
         this.style.display = "block"
         this.loadRecordFromAttribute()
         this.loadRecordFromValueElement()
+        this.initObject()
     }
 
     disconnectedCallback() {

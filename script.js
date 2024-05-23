@@ -237,37 +237,42 @@ function test10() {
         "name": "John Smith",
         "description": "Software analyst",
         "image": {
-            "@type": "imageObject",
+            "@type": "ImageObject",
+            "@id": "imgid1",
             "contentUrl": "./kraken.png"
         }
     }
 
+    let t = new KrThing()
+    t.record = record
+    console.log('t', t.record)
     let d = document.getElementById('test10')
-
     let a
 
 
     
     a = document.createElement('kr-image-avatar')
-    a.record = record
+    a.thing = t
+    
+    
     d.appendChild(a)
 
 
     a = document.createElement('kr-image-sm')
-    a.record = record
+    a.thing = t
     d.appendChild(a)
     
     a = document.createElement('kr-image-md')
-    a.record = record
+    a.thing = t
     d.appendChild(a)
 
 
      a = document.createElement('kr-image-lg')
-    a.record = record
+    a.thing = t
     d.appendChild(a)
 
      a = document.createElement('kr-image')
-    a.record = record
+    a.thing = t
     d.appendChild(a)
 
 
@@ -496,12 +501,12 @@ function test15() {
 
 //test8()
 //test9()
-//test10()
+test10()
 //test11()
 //test12()
 //test13()
 //test14()
-test15()
+//test15()
 
 
 

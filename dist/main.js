@@ -378,7 +378,6 @@ class $39f45085ee66ea88$export$b0d3c692106194fc extends HTMLElement {
         return elementRecord;
     }
     async renderHTML() {
-        console.log(this.record_type, this.elementRecord);
         let tpl = await $39f45085ee66ea88$var$engine.parse(this.htmlTemplate);
         this.htmlContent = await $39f45085ee66ea88$var$engine.render(tpl, {
             item: this.elementRecord,
@@ -429,7 +428,6 @@ class $39f45085ee66ea88$export$b0d3c692106194fc extends HTMLElement {
         this.initObject();
     }
     get thing() {
-        console.log("get thing", this.record_type);
         if (!this.record_type || this.record_type == null) return null;
         if (!this.record_id || this.record_id == null) return null;
         return this.krState.getThing(this.record_type, this.record_id);
@@ -522,6 +520,7 @@ class $39f45085ee66ea88$export$b0d3c692106194fc extends HTMLElement {
         this.style.display = "block";
         this.loadRecordFromAttribute();
         this.loadRecordFromValueElement();
+        this.initObject();
     }
     disconnectedCallback() {}
     adoptedCallback() {}
