@@ -497,7 +497,7 @@ function test15() {
 
 //test6()
 
-//test7()
+test7()
 
 //test8()
 //test9()

@@ -11,9 +11,8 @@ export function table() {
           <thead class="table-dark">
             <tr>
         
-            {% for pair in item.itemListElement[0] %} 
-                    {% assign key = pair[0] %} 
-                    {% assign value = pair[1] %} 
+            {% for key in config.keys %} 
+                    
                     
                     <th scope="col">{{ key }}</th>
             {% endfor %}
