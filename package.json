@@ -15,8 +15,9 @@
     "source": "src/index.js",
     "main": "dist/main.js",
     "name": "krakenelement",
+    "type": "module",
     "description": "Thing class",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "dependencies": {
         "krakenschema": "^1.0.0",
         "krakenthing": "^1.0.0",

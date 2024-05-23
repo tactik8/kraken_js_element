@@ -1,4 +1,4 @@
-import { KrThing } from 'krakenthing';
+import { KrThing } from 'krakenthing'
 
 
 

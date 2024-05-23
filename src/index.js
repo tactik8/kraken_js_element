@@ -22,7 +22,7 @@ import { KrFormInput } from './form/KrFormInput/KrFormInput.js'
 import { KrFormInputValue } from './form/KrFormInputValue/KrFormInputValue.js'
 
 
-export const KrElements = {
+export var KrElements = {
 
     KrState: KrStateElement,
     KrThing: KrThingElement,
