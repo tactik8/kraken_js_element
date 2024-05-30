@@ -1629,6 +1629,7 @@ class $d0e6389b231f00ae$export$61f029a88b5e2c25 extends (0, $6260eb9c6959f3a9$ex
 customElements.define("kr-action-status", $d0e6389b231f00ae$export$61f029a88b5e2c25);
 
 
+//import { objectTypeInternalSlot } from '@babel/types';
 
 function $1d9ccfc9ae737f9a$export$9852986a3ec5f6a0() {
     return `
@@ -1637,9 +1638,8 @@ function $1d9ccfc9ae737f9a$export$9852986a3ec5f6a0() {
           <thead class="table-dark">
             <tr>
         
-            {% for pair in item.itemListElement[0] %} 
-                    {% assign key = pair[0] %} 
-                    {% assign value = pair[1] %} 
+            {% for key in config.keys %} 
+                    
                     
                     <th scope="col">{{ key }}</th>
             {% endfor %}
@@ -1710,6 +1710,18 @@ class $c9792c3d0c357cf1$export$709c89605c2a432 extends (0, $39f45085ee66ea88$exp
     // -----------------------------------------------------
     async initObject() {
         //
+        if (!this.thing) return;
+        this.config.keys = this.getAttribute("data-keys");
+        this.config.headers = this.getAttribute("data-headers");
+        if (!this.config.keys) {
+            let items = this.thing.getProperty("itemListElement").values;
+            let keys = [];
+            for (let item of items){
+                for (let k of Object.keys(item.record))if (!keys.includes(k)) keys.push(k);
+            }
+            this.config.keys = keys;
+        }
+        if (!this.config.headers) this.config.headers = this.config.keys;
         await super.initObject();
     }
     // -----------------------------------------------------

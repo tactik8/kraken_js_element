@@ -1,7 +1,7 @@
 
 import { KrThingElement } from '../baseElements/KrThingElement/KrThingElement.js'
 
-import { avatar } from './template/avatar.js'
+import { template } from './template/template.js'
 
 
 export class KrAvatar extends KrThingElement {
@@ -10,12 +10,12 @@ export class KrAvatar extends KrThingElement {
 
 
         // Override template
-        this.htmlTemplate = avatar()
+        this.htmlTemplate = template()
 
 
         // 
         this._isSelected = false
-        this.setEventListenerDrag()
+        //this.setEventListenerDrag()
 
     }
 

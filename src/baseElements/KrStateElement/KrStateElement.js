@@ -1,10 +1,16 @@
 
-import { KrThing } from 'krakenthing';
+import { KrThing, KrThings } from 'krakenthing';
 
 
 export class KrStateElement extends HTMLElement {
     /**
-     * State manager 
+     * State manager
+     * attributes:
+     * -
+     * methods:
+     * - getThing:
+     * - setThing:
+     * 
      */
 
     constructor() {
@@ -100,12 +106,28 @@ export class KrStateElement extends HTMLElement {
     setThing(record) {
 
         if (!(record instanceof KrThing)){
-            let v = new KrThing()
+
+            let v 
+            if(record['@type'] == "ItemList"){
+                v = new KrThings()
+            } else {
+                v = new KrThing()
+            }
+            
             v.record = record
             record = v
-            
         }
 
+        // Convert to things if itemlist
+        console.log(record instanceof KrThings)
+        if(record.record_type == 'ItemList' && !(record instanceof KrThings)){
+            let v = new KrThings()
+            v.record = record.record
+            record = v
+        }
+
+
+        
         this._db.push(record)
         this.setListenerOnThing(record)
         

@@ -6,64 +6,68 @@
 export function table() {
 
     return `
-        
+       
         <table class="table table-hover">
-          <thead class="table-dark">
-            <tr>
+            <thead class="table-dark">
+                <tr>
+
+                    <th scope="col"><div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                                  
+                                    </div></th>
         
-            {% for key in config.keys %} 
-                    
-                    
-                    <th scope="col">{{ key }}</th>
-            {% endfor %}
-            
-            </tr>
-          </thead>
+                    {% for key in config.headers %}     
+                        <th scope="col">
+                            {{ key }}
+                        </th>
+                    {% endfor %}
+
+                    <th scope="col"></th>
+                </tr>
+            </thead>
 
           
-          <tbody>
+            <tbody>
         
-        
-            {% for record in item.itemListElement %}
-                <tr>
-            
-                {% for pair in record %} 
-                    {% assign key = pair[0] %} 
-                    {% assign value = pair[1] %} 
-        
-        
+                
+                {% for r in item.itemListElement %}
 
+                    
+                    <tr>
 
-                    {% if record[key][0]['@type']  %}
-
-        
-                        <td scope="col"><kr-avatar data-test="test1" data-record={{ record[key][0] | json }}> </kr-avatar></td>
                         
-                  
+                       
+                        <td>
+                        
+                            <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                                  
+                                    </div>
+                        </td>
+    
+    
+    
+                        {% for k in config.keys %}   
+                                <td>
+                               
+                                    <kr-table-property data-record-type="{{ r['@type'] }}" data-record-id="{{ r['@id'] }}" data-property-id="{{ k }}">
+                
+                               
+                                      
+                                   <kr-table-property>
+                                </td>
+                        {% endfor %}
 
-
-                    {% elsif record[key]['@type']  %}
-
-
-                        <td scope="col"><kr-avatar data-test="test1" data-record={{ record[key] | json }}> </kr-avatar></td>
-
-                    {% else %}
-
+                        <td class="text-end">
+                            <kr-action-menu data-record-type="{{ r['@type'] }}" data-record-id="{{ r['@id'] }}" >
+                            </kr-action-menu>
+                        </td>
+                             
+                    </tr>
                     
-                        <td scope="col">{{record[key]}}</td>
-                    
-                    {% endif %}
-        
-                    
-        
-        
-        
                 {% endfor %}
-        
-                </tr>
-            {% endfor %}
-           
-          </tbody>
+               
+            </tbody>
         </table>
         
         `

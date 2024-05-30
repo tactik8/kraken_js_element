@@ -11,15 +11,28 @@ import { KrActionStatusElement } from './action/KrActionStatusElement/KrActionSt
 
 
 import { KrTable } from './widgets/table/KrTable/KrTable.js'
+import { KrTablePropertyElement } from './widgets/table/KrTableProperty/KrTableProperty.js'
+import { KrTableValueElement } from './widgets/table/KrTableValue/KrTableValue.js'
 
 
 import { KrAvatar } from './KrAvatar/KrAvatar.js'
 
-import { KrImage, KrImageSm, KrImageMd, KrImageLg, KrImageAvatar } from './widgets/image/KrImage/KrImage.js'
+import { KrImage, KrImageXs, KrImageSm, KrImageMd, KrImageLg, KrImageAvatar } from './widgets/KrImage/KrImage.js'
 
 import { KrFormSm } from './form/KrFormSm/KrFormSm.js'
 import { KrFormInput } from './form/KrFormInput/KrFormInput.js'
 import { KrFormInputValue } from './form/KrFormInputValue/KrFormInputValue.js'
+
+
+import { KrCardElement } from './widgets/KrCard/KrCard.js'
+
+import { KrHeaderElement } from './widgets/KrHeader/KrHeader.js'
+import { KrFooterElement } from './widgets/KrFooter/KrFooter.js'
+import { KrSidebarElement } from './widgets/KrSidebar/KrSidebar.js'
+
+import { KrArticleContentElement } from './widgets/KrArticleContent/KrArticleContent.js'
+import { KrArticleToCElement } from './widgets/KrArticleToC/KrArticleToC.js'
+import { KrArticleElement } from './widgets/KrArticle/KrArticle.js'
 
 
 export var KrElements = {
@@ -36,12 +49,21 @@ export var KrElements = {
     KrTable: KrTable,
     KrAvatar: KrAvatar,
     KrImage: KrImage,
+    KrImageXs: KrImageXs,
     KrImageSm: KrImageSm,
     KrImageMd: KrImageMd, 
     KrImageLg: KrImageLg,
     KrImageAvatar: KrImageAvatar,
     KrFormInput: KrFormInput,
-    KrFormSm: KrFormSm
+    KrFormSm: KrFormSm,
+    KrCardElement: KrCardElement,
+    KrHeaderElement: KrHeaderElement,
+    KrFooterElement: KrFooterElement,
+    KrSidebarElement: KrSidebarElement,
+    KrArticleElement: KrArticleElement,
+    KrArticleToCElement: KrArticleToCElement,
+    KrArticleContentElement: KrArticleContentElement
+    
     
 }
 

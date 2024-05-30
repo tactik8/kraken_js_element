@@ -1,11 +1,11 @@
 import { KrThingElement } from '../../baseElements/KrThingElement/KrThingElement.js'
-import { icon } from './template/icon.js'
+import { template } from './template/template.js'
 
 
 export class KrActionElement extends KrThingElement {
     constructor() {
         super();
-        this.htmlTemplate = icon()
+        this.htmlTemplate = template()
         this.initialized = false
     }
 
@@ -18,33 +18,12 @@ export class KrActionElement extends KrThingElement {
     initObject(){
 
         super.initObject()
-        
         this.initEventListeners()
         
     }
 
 
-    getPropertiesfromAttributes(){
-        let actionName = this.getAttribute('data-action-name')
-
-
-        //this.thing = this.krState.getThing(this.record_type, this.record_id)
-
-        
-        
-        let record2 = {
-            "@type": actionName,
-            "@id": String(crypto.randomUUID()),
-            "name":  actionName,
-            "image": {"@type": "ImageObject", "contentUrl": this.getIcon(actionName)},
-            "url": "",
-            "actionStatus": "potentialActionStatus"
-        }
-  
-        //this.record = record
-      
-    }
-
+    
     
     getIcon(actionName){
 
@@ -138,8 +117,7 @@ export class KrActionElement extends KrThingElement {
     // -----------------------------------------------------
 
     connectedCallback() {
-        this.initObject()
-        this.getPropertiesfromAttributes()
+        super.connectedCallback()
     }
     
 

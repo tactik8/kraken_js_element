@@ -1,11 +1,11 @@
 import { KrPropertyElement } from '../../baseElements/KrPropertyElement/KrPropertyElement.js'
-import { menu } from './template/menu.js'
+import { template } from './template/template.js'
 
 
 export class KrActionMenuElement extends KrPropertyElement {
     constructor() {
         super();
-        this.htmlTemplate = menu()
+        this.htmlTemplate = template()
 
 
     }
@@ -16,39 +16,20 @@ export class KrActionMenuElement extends KrPropertyElement {
     // -----------------------------------------------------
 
 
-
     initObject(){
 
         this.propertyID = 'potentialAction'
-
         super.initObject()
-
-    
-
-
         
     }
 
-
-  
-
-
-    // -----------------------------------------------------
-    //  Process action 
-    // -----------------------------------------------------
-
-
-
-
     
-
-
     // -----------------------------------------------------
     //  Events 
     // -----------------------------------------------------
 
     connectedCallback() {
-        this.initObject()
+        super.connectedCallback()
     }
 
 

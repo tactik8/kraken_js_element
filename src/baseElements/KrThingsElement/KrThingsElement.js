@@ -1,14 +1,10 @@
 
+import { KrThing } from 'krakenrecord';
 import { KrThingElement } from '../KrThingElement/KrThingElement.js'
 
-import { baseTemplate } from './templates/base.js'
-
-import * as liquidjs from 'liquidjs'
+import { template } from './template/template.js'
 
 
-
-//import { Liquid } from 'liquidjs'
-const engine = new liquidjs.Liquid()
 
 
 
@@ -17,7 +13,7 @@ export class KrThingsElement extends KrThingElement {
         super();
 
         // Set template and content for list
-        this.htmlTemplate = baseTemplate()
+        this.htmlTemplate = template()
         
         // Set template for listItems
         this.listItemTemplate = null
@@ -30,9 +26,7 @@ export class KrThingsElement extends KrThingElement {
         // Set options
         this.showSelect = true
         this.showPosition = true
-        
-
-
+    
         
     }
 
@@ -43,12 +37,14 @@ export class KrThingsElement extends KrThingElement {
 
     async initObject(){
 
+
+        this.convertItems()
         await super.initObject()
        
-        this.loadRecords()
+        //this.loadRecords()
 
-        this.setEventListenerSelect()
-        this.setEventListenerDrop()
+        //this.setEventListenerSelect()
+        //this.setEventListenerDrop()
 
     }
 
@@ -62,6 +58,32 @@ export class KrThingsElement extends KrThingElement {
         
     }
 
+
+    
+
+    // -----------------------------------------------------
+    //  Items manipulation 
+    // -----------------------------------------------------
+
+
+
+    convertItems(){
+        // Ensures that items in itemListElement are of type listItem
+
+        let items = this.thing.getProperty('itemListElement').values
+
+        for(let item in items){
+
+            if(items?.record_type != "ListItem"){
+
+                let newItem = new KrThing('ListItem')
+                newItem.record = item
+                this.thing.replaceProperty('itemListElement', item)
+            }
+        }
+    }
+    
+    
   
     // -----------------------------------------------------
     //  Element navigation 
@@ -72,21 +94,6 @@ export class KrThingsElement extends KrThingElement {
     }
 
    
-   
-
-    // -----------------------------------------------------
-    //  Content renderer 
-    // -----------------------------------------------------
-
-    async renderHTML(){
-
-        let tpl = await engine.parse(this.htmlTemplate)
-        let r = JSON.parse(JSON.stringify(this.elementRecord))
-        r['itemListElement'] = '<span class="krItemListElement"></span>'
-        this.htmlContent = await engine.render(tpl, r)
-
-    }
-
     
     // -----------------------------------------------------
     //  Select section 
@@ -111,16 +118,12 @@ export class KrThingsElement extends KrThingElement {
 
     
     get isSelected(){
-
         return this.KrSelect.checked
-
     }
 
 
     set isSelected(value){
-
         this.KrSelect.checked = value
-        
     }
 
     selectAll(){
@@ -144,13 +147,13 @@ export class KrThingsElement extends KrThingElement {
     setEventListenerSelect(){
 
         let m = this
-            this.KrSelect.addEventListener('click', (event)=>{
+        this.KrSelect.addEventListener('click', (event)=>{
 
-                if(m.isSelected == true){
-                    this.selectAll()
-                } else {
-                    this.selectNone()
-                }
+            if(m.isSelected == true){
+                this.selectAll()
+            } else {
+                this.selectNone()
+            }
 
         })
     }
