@@ -16,8 +16,8 @@ export function template() {
      
       <ul class="dropdown-menu">
 
-
-        {% for action in item %}
+        
+        {% for action in config.potentialActions %}
         <li class="dropdown-item">
        
           <kr-action data-record-type="{{ action['@type'] }}" data-record-id="{{ action['@id'] }}">

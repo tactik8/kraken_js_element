@@ -17,11 +17,11 @@
   },
   "name": "krakenelement",
   "description": "Thing class",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "dependencies": {
-    "krakenrecord": "^1.0.3",
+    "krakenrecord": "^1.0.24",
     "krakenschema": "^1.0.0",
-    "krakenthing": "^1.0.3",
+    "krakenthing": "^1.0.43",
     "liquidjs": "^10.13.0",
     "ts-jest": "^29.1.3"
   },

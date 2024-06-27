@@ -1,4 +1,6 @@
 import { KrStateElement } from './baseElements/KrStateElement/KrStateElement.js'
+import { KrSelectElement } from './baseElements/KrSelectElement/KrSelectElement.js'
+
 import { KrThingElement } from './baseElements/KrThingElement/KrThingElement.js'
 import { KrThingsElement } from './baseElements/KrThingsElement/KrThingsElement.js'
 import { KrPropertyElement } from './baseElements/KrPropertyElement/KrPropertyElement.js'
@@ -34,6 +36,11 @@ import { KrArticleContentElement } from './widgets/KrArticleContent/KrArticleCon
 import { KrArticleToCElement } from './widgets/KrArticleToC/KrArticleToC.js'
 import { KrArticleElement } from './widgets/KrArticle/KrArticle.js'
 
+import { KrEditor } from './editor/KrEditor/KrEditor.js'
+import { KrEditorLine} from './editor/KrEditorLine/KrEditorLine.js'
+import { KrLinearThing} from './editor/KrLinearThing/KrLinearThing.js'
+import { KrSimple} from './widgets/KrSimple/KrSimple.js'
+
 
 export var KrElements = {
 
@@ -62,7 +69,10 @@ export var KrElements = {
     KrSidebarElement: KrSidebarElement,
     KrArticleElement: KrArticleElement,
     KrArticleToCElement: KrArticleToCElement,
-    KrArticleContentElement: KrArticleContentElement
+    KrArticleContentElement: KrArticleContentElement,
+    KrSelectElement: KrSelectElement,
+    KrEditor: KrEditor,
+    KrEditorLine: KrEditorLine
     
     
 }

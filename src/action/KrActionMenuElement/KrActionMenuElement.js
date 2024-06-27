@@ -19,6 +19,8 @@ export class KrActionMenuElement extends KrPropertyElement {
     initObject(){
 
         this.propertyID = 'potentialAction'
+        
+        this.config.potentialActions =  this?.thingElement?.potentialActions
         super.initObject()
         
     }

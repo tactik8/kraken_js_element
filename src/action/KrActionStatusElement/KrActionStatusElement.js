@@ -1,18 +1,21 @@
 
-import { KrValueElement } from '../../baseElements/KrValueElement/KrValueElement.js'
+import { KrPropertyElement } from '../../baseElements/KrPropertyElement/KrPropertyElement.js'
 
 //import { status } from './template/status.js'
 
 
-export class KrActionStatusElement extends KrValueElement {
+export class KrActionStatusElement extends KrPropertyElement {
     constructor() {
         super();
 
 
         // Override template
-      this.setEventListenerClick()
+        this.propertyID = 'actionStatus'
+        this.setEventListenerClick()
 
+        this._value = null
 
+        
        
 
     }
@@ -22,7 +25,28 @@ export class KrActionStatusElement extends KrValueElement {
     //  Init 
     // -----------------------------------------------------
 
-    
+    initObject(){
+
+        //super.initObject()
+        this.refreshElement()
+        
+        
+    }
+
+    refreshElement(){
+
+        let newValue = this.thing.getProperty('actionStatus').value
+        if(newValue != this._value){
+            this._value = newValue
+            if(this._value == "potentialActionStatus") { this.contentElement.innerHTML = this.potentialActionStatusIcon()}
+                else if(this._value == "completedActionStatus") { this.contentElement.innerHTML = this.completedActionStatusIcon() }
+                    
+                else if(this._value == "activeActionStatus") { this.contentElement.innerHTML = this.activeActionStatusIcon() }
+                else if(this._value == "failedActionStatus") { this.contentElement.innerHTML = this.failedActionStatusIcon() }
+                else  { this.contentElement.innerHTML = this.potentialActionStatusIcon() }
+            }
+        
+    }
 
     // -----------------------------------------------------
     //  Set listener 
@@ -39,7 +63,14 @@ export class KrActionStatusElement extends KrValueElement {
     }
 
 
+    // -----------------------------------------------------
+    //  Additional attributes 
+    // -----------------------------------------------------
 
+    get contentElement(){
+        return this
+    }
+    
     
     // -----------------------------------------------------
     //  Status 
@@ -48,41 +79,36 @@ export class KrActionStatusElement extends KrValueElement {
 
     assignNextStatus(){
 
-        if(this._value == "potentialActionStatus") { this.setCompletedActionStatus() }
-        else if(this._value == "completedActionStatus") { this.setActiveActionStatus() }
-            
-        else if(this._value == "activeActionStatus") { this.setFailedActionStatus() }
+        if(this._value == "potentialActionStatus") { 
+            this.setCompletedActionStatus() 
+        }
+        else if(this._value == "completedActionStatus") { 
+            this.setActiveActionStatus() 
+        } else if(this._value == "activeActionStatus") { this.setFailedActionStatus() }
         else if(this._value == "failedActionStatus") { this.setPotentialActionStatus() }
         else  { this.setPotentialActionStatus() }
     }
 
 
-    setRecord(value){
-
-        if(this?.thing?.record){
-            this.thing.record.actionStatus = value
-        }
-    }
 
     setPotentialActionStatus(){
 
         this._value = "potentialActionStatus"
-        this.setRecord('potentialActionStatus')
-        
+        this.thing.replaceProperty('actionStatus', 'potentialActionStatus')
         this.contentElement.innerHTML = this.potentialActionStatusIcon()
     }
 
     setActiveActionStatus(){
 
         this._value = "activeActionStatus"
-        this.setRecord('activeActionStatus')
+        this.thing.replaceProperty('actionStatus','activeActionStatus')
         this.contentElement.innerHTML = this.activeActionStatusIcon()
     }
     
     setCompletedActionStatus(){
 
         this._value = "completedActionStatus"
-        this.setRecord('completedActionStatus')
+        this.thing.replaceProperty('actionStatus','completedActionStatus')
         this.contentElement.innerHTML = this.completedActionStatusIcon()
 
     }
@@ -90,7 +116,7 @@ export class KrActionStatusElement extends KrValueElement {
     setFailedActionStatus(){
 
         this._value = "failedActionStatus"
-        this.setRecord('failedActionStatus')
+        this.thing.replaceProperty('actionStatus','failedActionStatus')
         this.contentElement.innerHTML = this.failedActionStatusIcon()
 
     }

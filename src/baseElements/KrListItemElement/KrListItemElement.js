@@ -1,5 +1,5 @@
 
-import { card } from './template/card.js'
+import { template } from './template/template.js'
 import * as liquidjs from 'liquidjs';
 import { KrThingElement } from '../KrThingElement/KrThingElement.js'
 const engine = new liquidjs.Liquid()
@@ -13,16 +13,9 @@ export class KrListItemElement extends KrThingElement {
 
 
         // Override template
-        this.htmlTemplate = card()
+        this.htmlTemplate = template()
 
-
-        // Set template for item content
-        this.itemTemplate = null
-
-
-        // 
-        this._isSelected = false
-
+     
     }
 
 
@@ -33,37 +26,73 @@ export class KrListItemElement extends KrThingElement {
     async initObject() {
 
         //
+        this.classList.add('kr-list-item')
+
+        if (this.things && this.things != null){
+            
+            this.config.elementTemplate = this.things.elementTemplate
+            this.config.showSelect = this.things.showSelect
+            this.config.showPosition = this.things.showPosition
+            this.config.showActions = this.things.showActions
+            this.config.potentialAction = this.potentialActions || this.defaultActions
+            this.isInitialized = true
+        }
+
+        
+        
         await super.initObject()
 
-        this.showItemContent()
-        
         this.setEventListenerPotentialActions()
-        this.setEventListenerSelect()
-        this.setEventListenerClick()
+        //this.setEventListenerSelect()
+        //this.setEventListenerClick()
         this.setEventListenerReorder()
 
     }
 
 
-    async refreshObject(){
-        await this.initObject()
+    refreshElement(){
+
+        
+        super.refreshElement()
         
     }
-    
+    eventManager(event){
+
+        if(event.data.propertyID == 'previousItem'){
+            return 
+        }
+        if(event.data.propertyID == 'nextItem'){
+            return 
+        }
+        
+        super.eventManager(event)
+    }
+        
     resetPosition(){
 
-        let oldValue = this.record.position
+        return
+        if(!this.previousItem || this.previousItem == null){
+            this.thing.position = 0
+        }
+
+        
+        if(this.thing.previousItem){
+
+            let previousPosition = this.thing.previousItem.getProperty('position').value
+           
+        }
+        let oldValue = this.thing.position
         let newValue = this.position
 
         if(oldValue != newValue) {
             
-            this.record.position = this.position
+            this.thing.position = this.position
 
             if (this.thing){
-                this.thing.replaceProperty('position', this.position)
+                this.thing.position = this.position
             }
 
-            this.refreshObject()
+            this.refreshElement()
         }
         
         if(this.nextItem){
@@ -86,56 +115,8 @@ export class KrListItemElement extends KrThingElement {
         return this.querySelector('kr-potential-actions')
     }
 
-    get KrSelect() {
-        return this.querySelector('kr-select > input')
-    }
+  
 
-
-    // -----------------------------------------------------
-    //  Content 
-    // -----------------------------------------------------
-
-    async renderHTML() {
-
-        let tpl = await engine.parse(this.htmlTemplate)
-        let r = JSON.parse(JSON.stringify(this.record))
-        r['item'] = '<span class="krItemElement"></span>'
-        this.htmlContent = await engine.render(tpl, r)
-
-    }
-
-    showItemContent() {
-        let itemElement = document.createElement(this.itemTemplate)
-        itemElement.record = this.record?.item
-        this.krItemElement.innerHTML = ''
-        this.krItemElement.appendChild(itemElement)
-    }
-
-
-    // -----------------------------------------------------
-    //  Select section 
-    // -----------------------------------------------------
-
-    get isSelected() {
-
-        return this.KrSelect.checked
-
-    }
-
-    setEventListenerSelect() {
-
-        let m = this
-        this.KrSelect.addEventListener('click', (event) => {
-
-            if (m.isSelected == true) {
-                m.firstElementChild.classList.add('bg-body-tertiary')
-                this.isSelected = true
-            } else {
-                m.firstElementChild.classList.remove('bg-body-tertiary')
-                this.isSelected = false
-            }
-        })
-    }
 
 
     // -----------------------------------------------------
@@ -180,20 +161,8 @@ export class KrListItemElement extends KrThingElement {
     // -----------------------------------------------------
 
 
-    get isSelected() {
-        return this._isSelected
-    }
-
-    set isSelected(value) {
-
-        let oldValue = this._isSelected
-        this._isSelected = value
-        if (value != oldValue) {
-            const event = new CustomEvent("kr-select", { detail: this.record });
-            this.dispatchEvent(event)
-            this.KrSelect.checked = value
-        }
-    }
+    
+    
 
 
     recordToListItem(record) {
@@ -209,13 +178,25 @@ export class KrListItemElement extends KrThingElement {
     }
 
     get position() {
+
+        let position = this.thing.position
+        if(position == null){ position = 0 }
+        return position
+
+        
         if (this.previousItem == null) {
             return 0
         } else {
-            return this.previousItem.position + 1
+            return this.thing.getProperty('position')?.value
         }
     }
 
+    set position(value){
+
+        if(value == null){ value = 0}
+        this.thing.position = value
+        
+    }
 
     get firstItem() {
 
@@ -227,27 +208,67 @@ export class KrListItemElement extends KrThingElement {
     }
     
     get previousItem() {
-        let item = this.previousSibling
 
-        while(item && item.tagName != this.tagName){
-            item = item.previousSibling || null
-        }
-        return item
+        let value = this.thing.getProperty('previousItem')?.value
+        if(!value || value == null){ return null }
+
+        let itemElement = this.things.getItemElement(value.record_type, value.record_id)
+        
+        return itemElement
+            
     }
     
     get nextItem() {
-        let item = this.nextSibling
-
-        while(item && item.tagName != this.tagName){
-            item = item.nextSibling || null
-        }
-        return item
+        let value = this.thing.getProperty('nextItem')?.value
+        if(!value || value == null){ return null }
+        
+        let itemElement = this.things.getItemElement(value.record_type, value.record_id)
+        return itemElement
     }
 
     get things(){
-        return this.closest('kr-things')
+        return this.closest('.kr-things')
     }
 
+
+
+
+
+    // -----------------------------------------------------
+    //  Default actions 
+    // -----------------------------------------------------
+
+
+    get defaultActions(){
+
+        let records = []
+        records.push(this.defaultActionDelete)
+
+        return records
+        
+    }
+
+    get defaultActionDelete(){
+
+        let record = {
+            "@type": "DeleteAction",
+            "name": "DeleteStuff",
+            "actionStatus": "potentialActionStatus",
+            "object": {"@type": this.record_type, "@id": this.record_id},
+            "collection": {"@type": this.things.record_type, "@id": this.things.record_id}
+        }
+        return record
+
+    }
+    
+    get defaultActionCopy(){
+
+        let record = {
+            "@type": ""
+        }
+        
+    }
+    
 
     // -----------------------------------------------------
     //  Drag reorder 
@@ -322,24 +343,6 @@ export class KrListItemElement extends KrThingElement {
     }
 
     
-
-    connectedCallback() {
-        //console.log("Custom element added to page.");
-    }
-
-    disconnectedCallback() {
-        //console.log("Custom element removed from page.");
-    }
-
-    adoptedCallback() {
-       // console.log("Custom element moved to new page.");
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        //console.log(`Attribute ${name} has changed krListItem.`);
-    }
-
-
 
 
 

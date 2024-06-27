@@ -21,11 +21,12 @@ export function test_things(testNo) {
     let things = new KrThings()
     things.record = record
 
-    console.log(JSON.stringify(things.record, null, 4))
+    //console.log(JSON.stringify(things.record, null, 4))
 
     
     let a = document.createElement("kr-things")
     a.thing = record
+    a.showPosition = false
 
     
     //a.record = record
@@ -33,4 +34,7 @@ export function test_things(testNo) {
     let d = document.getElementById(testNo)
 
     d.appendChild(a)
+
+
+    things.setProperty('name', 'itemlist2')
 }

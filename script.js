@@ -22,6 +22,9 @@ import { test_sidebar } from "./tests/test_sidebar.js"
 import { test_thing_from_url } from "./tests/test_thing_from_url.js"
 import { test_article } from "./tests/test_article.js"
 import { test_things } from "./tests/test_things.js"
+import { test_eventListener } from "./tests/test_eventListener.js"
+import { test_editor } from "./tests/test_editor.js"
+import { test_simple } from "./tests/test_simple.js"
 
 
 //test_header('test1')
@@ -34,4 +37,7 @@ import { test_things } from "./tests/test_things.js"
 //test_thing_from_url('test10')
 //test_article('test1')
 
-test_things('test1')
+//test_things('test2')
+//test_eventListener('test1')
+test_editor('test1')
+//test_simple('test1')

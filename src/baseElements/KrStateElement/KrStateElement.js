@@ -1,5 +1,5 @@
 
-import { KrThing, KrThings } from 'krakenthing';
+import { KrThing, KrThings, KrDb } from 'krakenthing';
 
 
 export class KrStateElement extends HTMLElement {
@@ -16,7 +16,7 @@ export class KrStateElement extends HTMLElement {
     constructor() {
         super();
 
-        this._db = []
+        this._db = new KrDb('https://data.krknapi.com/api/test7')
         this.record_type = "ItemList"
         this.record_id = String(crypto.randomUUID())
         this.record_ref = { "@type": this.record_type, "@id": this.record_id }
@@ -53,6 +53,13 @@ export class KrStateElement extends HTMLElement {
 
     getThing(record_type, record_id) {
 
+        let thing = this._db.getFromCache(record_type, record_id)
+
+        if(!thing || thing == null){
+            this._db.getFromApi(record_type, record_id)
+        }
+        console.log('got ', thing)
+        return thing
         
         
         if (record_type && record_type != null) {
@@ -64,7 +71,7 @@ export class KrStateElement extends HTMLElement {
             }
 
         } else {
-            return this._get_records_all()
+            return null
         }
     }
 
@@ -105,6 +112,10 @@ export class KrStateElement extends HTMLElement {
 
     setThing(record) {
 
+
+        if(!record || record == null){ return null }
+
+        
         if (!(record instanceof KrThing)){
 
             let v 
@@ -119,7 +130,7 @@ export class KrStateElement extends HTMLElement {
         }
 
         // Convert to things if itemlist
-        console.log(record instanceof KrThings)
+        
         if(record.record_type == 'ItemList' && !(record instanceof KrThings)){
             let v = new KrThings()
             v.record = record.record
@@ -127,8 +138,16 @@ export class KrStateElement extends HTMLElement {
         }
 
 
+        // Check if already there
+        if (this.getThing(record.record_type, record.record_id)){
+            return record
+        }
+
+        // Set to cache
+        this._db.postToCache(record)
+
         
-        this._db.push(record)
+        //this._db.push(record)
         this.setListenerOnThing(record)
         
         for (let r of record.things) {
@@ -144,10 +163,17 @@ export class KrStateElement extends HTMLElement {
 
     setListenerOnThing(thing){
 
+        let element = this
         thing.addEventListener('all', event => {
 
-            let t = event.target
-            //console.log('Saving thing', t.record_type, t.record_id, t)
+            let thing = event.target.record_type
+            for (let r of event.target.things) {
+
+                
+                this.setThing(r)
+                
+            }
+            element.setThing(event.target)
             //t.api_post()
 
             

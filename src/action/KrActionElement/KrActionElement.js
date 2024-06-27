@@ -17,7 +17,14 @@ export class KrActionElement extends KrThingElement {
 
     initObject(){
 
+        
+        
+        if(this.thingElement){
+            let record = this.thingElement.getAction(this.record_type, this.record_id)
+            this.thing = this.thingElement.getAction(this.record_type, this.record_id)
+        }
         super.initObject()
+       
         this.initEventListeners()
         
     }
@@ -47,7 +54,6 @@ export class KrActionElement extends KrThingElement {
 
         if(this.initialized == false){
             this.addEventListener('click', (event) =>{
-                console.log('click action', this.id)
                 this.actionExecute()
 
             })
@@ -93,7 +99,6 @@ export class KrActionElement extends KrThingElement {
 
     executeAddAction(){
 
-        console.log('add', this.record_type)
         let o = this.thing.getProperty('object').value
         
         let collection = this.thing.getProperty('targetCollection').value
