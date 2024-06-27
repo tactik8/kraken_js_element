@@ -318,7 +318,25 @@ export class KrBaseElement extends HTMLElement {
             if(this._base_type == 'KrThing'){
                 this._thing = this.valueElement?.value || null
             }
+
         } 
+
+        if(!this._thing || this._thing == null){
+            if(this._base_type == 'KrThing'){
+                // Create new thing
+                if(this.record_type && this.record_id){
+                    this._thing = new KrThing(this.record_type, this.record_id)    
+                    this.stateElement.setThing(this._thing)                
+                }
+            }
+
+           
+
+        } 
+
+
+
+        
         
         // If value, get parent KrPropertyElement
         if(!this._thing || this._thing == null){
@@ -340,10 +358,6 @@ export class KrBaseElement extends HTMLElement {
         } 
 
 
-        // Create new thing
-        if(this.record_type && this.record_id){
-            this._thing = new KrThing(this.record_type, this.record_id)
-        }
         
         return this._thing 
 

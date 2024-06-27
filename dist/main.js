@@ -367,6 +367,15 @@ class $f8f777b7d537305b$export$6937c6a84099f1b6 extends HTMLElement {
         if (!this._thing || this._thing == null) {
             if (this._base_type == "KrThing") this._thing = this.valueElement?.value || null;
         }
+        if (!this._thing || this._thing == null) {
+            if (this._base_type == "KrThing") // Create new thing
+            {
+                if (this.record_type && this.record_id) {
+                    this._thing = new (0, $5OpyM$KrThing)(this.record_type, this.record_id);
+                    this.stateElement.setThing(this._thing);
+                }
+            }
+        }
         // If value, get parent KrPropertyElement
         if (!this._thing || this._thing == null) {
             if (this._base_type == "KrValue") this._thing = this.propertyElement?.thing || null;
@@ -379,8 +388,6 @@ class $f8f777b7d537305b$export$6937c6a84099f1b6 extends HTMLElement {
             this._record_id = searchParams.get("@id");
             this._thing = this.stateElement.getThing(this.record_type, this.record_id) || null;
         }
-        // Create new thing
-        if (this.record_type && this.record_id) this._thing = new (0, $5OpyM$KrThing)(this.record_type, this.record_id);
         return this._thing;
     }
     set thing(value) {

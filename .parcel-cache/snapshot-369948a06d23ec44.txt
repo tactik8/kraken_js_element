@@ -1,5 +1,5 @@
 15216
-42/home/runner/krakenjselements/package.json1719498063256007983 0
+42/home/runner/krakenjselements/package.json1719498309043340081 0
 50/home/runner/krakenjselements/tests/test_simple.js1718125124918465101 0
 50/home/runner/krakenjselements/tests/test_editor.js1717679261398140785 0
 50/home/runner/krakenjselements/tests/test_things.js1717167008030996861 0
@@ -10,8 +10,8 @@
 49/home/runner/krakenjselements/tests/test_table.js1716985918893232953 0
 57/home/runner/krakenjselements/.config/npm/node_global/lib1716473318495645625 1
 37/home/runner/krakenjselements/.config1716473318495645625 1
-42/home/runner/krakenjselements/dist/main.js1719498101887903005 0
-34/home/runner/krakenjselements/dist1719498101895902983 1
+42/home/runner/krakenjselements/dist/main.js1719498313223328722 0
+34/home/runner/krakenjselements/dist1719498313231328700 1
 68/home/runner/krakenjselements/src/extractFromText/extractFromText.js1718019266808027849 0
 63/home/runner/krakenjselements/src/editor/KrLinearThing/template1717767929509150768 1
 54/home/runner/krakenjselements/src/editor/KrLinearThing1717768887823756144 1
@@ -65,8 +65,8 @@
 47/home/runner/krakenjselements/src/widgets/table1716814300433646059 1
 71/home/runner/krakenjselements/src/baseElements/KrSelectElement/template1717093999859617372 1
 62/home/runner/krakenjselements/src/baseElements/KrSelectElement1717599709111153189 1
-77/home/runner/krakenjselements/src/baseElements/KrBaseElement/KrBaseElement.js1719498044540058842 0
-60/home/runner/krakenjselements/src/baseElements/KrBaseElement1719498044544058831 1
+77/home/runner/krakenjselements/src/baseElements/KrBaseElement/KrBaseElement.js1719498290699389929 0
+60/home/runner/krakenjselements/src/baseElements/KrBaseElement1719498290727389853 1
 65/home/runner/krakenjselements/src/action/KrActionElement/template1716825749342385332 1
 85/home/runner/krakenjselements/src/baseElements/KrListItemElement/template/template.js1718023898263648606 0
 61/home/runner/krakenjselements/src/baseElements/KrValueElement1718196290283431494 1
@@ -6245,7 +6245,7 @@
 108/home/runner/krakenjselements/node_modules/@parcel/optimizer-svgo/node_modules/csso/lib/restructure/index.js1716473315187650620 0
 90/home/runner/krakenjselements/node_modules/@babel/plugin-syntax-optional-catch-binding/lib1716303898136740737 1
 80/home/runner/krakenjselements/node_modules/cosmiconfig/node_modules/.bin/js-yaml1716473317159647642 0
-29/home/runner/krakenjselements1719498063276007928 1
+29/home/runner/krakenjselements1719498309067340016 1
 89/home/runner/krakenjselements/node_modules/jest-watcher/node_modules/chalk/source/util.js1716303898212740527 0
 88/home/runner/krakenjselements/node_modules/@swc/helpers/_/_array_with_holes/package.json1716473315419650269 0
 58/home/runner/krakenjselements/node_modules/@parcel/fs/test1716473314939650994 1
@@ -12819,7 +12819,7 @@
 62/home/runner/krakenjselements/node_modules/resolve/lib/sync.js1716303898952738482 0
 116/home/runner/krakenjselements/node_modules/@parcel/optimizer-svgo/node_modules/css-tree/lib/syntax/scope/selector.js1716473315411650281 0
 59/home/runner/krakenjselements/node_modules/resolve/index.js1716303898868738715 0
-46/home/runner/krakenjselements/dist/main.js.map1719498101891902994 0
+46/home/runner/krakenjselements/dist/main.js.map1719498313231328700 0
 63/home/runner/krakenjselements/node_modules/csso/lib/restructure1716473313907652552 1
 113/home/runner/krakenjselements/node_modules/@parcel/transformer-postcss/node_modules/semver/functions/satisfies.js1716473315003650897 0
 58/home/runner/krakenjselements/node_modules/resolve/sync.js1716303898952738482 0
